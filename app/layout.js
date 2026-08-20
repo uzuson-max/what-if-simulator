@@ -3,16 +3,10 @@ export const metadata = {
   description: '5분 동안 256Kbps 인터넷 속도를 체험해보세요.',
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }) {
   return (
     <html lang="ko">
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
