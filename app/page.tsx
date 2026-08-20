@@ -27,7 +27,8 @@ export default function Home() {
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    const formattedSecs = secs < 10 ? `0${secs}` : `${secs}`;
+    return `${mins}:${formattedSecs}`;
   };
 
   return (
