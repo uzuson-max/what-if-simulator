@@ -24,7 +24,7 @@ export default function Home() {
     return () => clearInterval(timer);
   }, [started, finished]);
 
-  const formatTime = (seconds: number) => {
+  const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     const formattedSecs = secs < 10 ? `0${secs}` : `${secs}`;
