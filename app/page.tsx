@@ -70,27 +70,59 @@ export default function Home() {
               화면을 나가거나 다른 앱을 써도 됩니다. <br />실제로 불편함을 느껴보세요.
             </p>
           </div>
-        ) : (
-          <div className="text-center py-4">
-            <h2 className="text-xl font-bold mb-2">🎉 5분 체험 종료!</h2>
-            <p className="text-neutral-400 text-sm mb-6">
-              인터넷 제한 상황에서 무사히(?) 살아남으셨습니다. <br /> 답답하셨나요?
-            </p>
-            
-            <button
-              onClick={() => {
-                setStarted(false);
-                setTimeLeft(300);
-                setFinished(false);
-              }}
-              className="w-full bg-neutral-800 hover:bg-neutral-700 text-neutral-200 font-semibold py-3 px-4 rounded-xl transition duration-200 text-sm"
-            >
-              처음으로 돌아가기
-            </button>
-          </div>
-        )}
+     ) : (
+  <div className="text-center py-4">
+    <h2 className="text-xl font-bold mb-2">🎉 5분 체험 종료!</h2>
+    <p className="text-neutral-400 text-sm mb-6">
+      인터넷 제한 상황에서 무사히(?) 살아남으셨습니다.<br />
+      생각보다 엄청 답답하셨죠? 이 답답함을 친구에게도 선물해보세요!
+    </p>
 
-      </div>
-    </main>
-  );
-}
+    {/* 공유하기 & 링크 복사 버튼 영역 */}
+    <div className="space-y-3 mb-6">
+      <button
+        onClick={async () => {
+          const shareData = {
+            title: 'What If? - SLOW INTERNET 시뮬레이션',
+            text: '나 5분 동안 256Kbps로 인터넷 참아봤는데 진짜 목 타는 줄 알았다... 너도 한번 해봐 ㅋㅋ',
+            url: window.location.href,
+          };
+          try {
+            if (navigator.share) {
+              await navigator.share(shareData);
+            } else {
+              await navigator.clipboard.writeText(window.location.href);
+              alert('링크가 복사되었습니다! 친구에게 공유해 보세요.');
+            }
+          } catch (err) {
+            console.log('공유 취소됨');
+          }
+        }}
+        className="w-full bg-amber-500 hover:bg-amber-400 text-neutral-950 font-bold py-3.5 px-4 rounded-xl transition duration-200 cursor-pointer text-sm flex items-center justify-center gap-2"
+      >
+        <span>📤 친구에게 이 고통(?) 공유하기</span>
+      </button>
+
+      <button
+        onClick={() => {
+          navigator.clipboard.writeText(window.location.href);
+          alert('링크가 클립보드에 복사되었습니다!');
+        }}
+        className="w-full bg-neutral-800 hover:bg-neutral-700 text-neutral-300 font-medium py-2.5 px-4 rounded-xl transition duration-200 text-xs"
+      >
+        🔗 링크 복사하기
+      </button>
+    </div>
+    
+    <button
+      onClick={() => {
+        setStarted(false);
+        setTimeLeft(300);
+        setFinished(false);
+      }}
+      className="text-neutral-500 hover:text-neutral-300 text-xs transition duration-200 underline"
+    >
+      처음으로 돌아가기
+    </button>
+  </div>
+)}
